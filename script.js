@@ -1,7 +1,15 @@
-// Current Date and Time (UTC)
-const currentDateTime = () => {
-    const now = new Date();
-    return now.toISOString().replace('T', ' ').substring(0, 19);
-};
+document.getElementById("year").textContent = new Date().getFullYear();
 
-console.log(`Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): ${currentDateTime()}`);
+const buttons = document.querySelectorAll(".acc-btn");
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+
+    const panel = btn.nextElementSibling;
+    panel.style.display = expanded ? "none" : "block";
+
+    const icon = btn.querySelector(".acc-icon");
+    if (icon) icon.textContent = expanded ? "+" : "–";
+  });
+});
